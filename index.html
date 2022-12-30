@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #787575;
+        }
+
+        html {
+            font-size: clamp(12px, 1.5rem, 1.2vw);
+        }
+
+        .container {
+            padding: 0 1rem;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        button {
+            border: none;
+            background-color: transparent;
+            color: white;
+        }
+
+        button:hover,
+        a:hover {
+            filter: saturate(200%);
+        }
+
+        button:active,
+        a:active {
+            filter: saturate(200%) brightness(80%);
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
