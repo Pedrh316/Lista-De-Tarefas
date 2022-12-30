@@ -6,6 +6,7 @@ import TextArea from "../panelItems/TextArea";
 import { SBtnLink } from "../BtnLink";
 import useControlled from "../../hooks/useControlled";
 import { SaveTaskContext } from "../Main";
+import { Navigate } from "react-router-dom"; 
 
 const SMarkdown = styled.section`
     padding:2rem 4rem;
@@ -64,14 +65,15 @@ const Markdown = () => {
         if(isFinished){
             const allTasks = JSON.parse(localStorage.getItem('tasks')) || '';
 
-            const task = {
+            const newTask = {
                 id:allTasks.length,
                 task:value
             }
-            const newTasks = [...allTasks, task]
+            const newTasks = [...allTasks, newTask]
             
             localStorage.setItem('tasks', JSON.stringify(newTasks));
             updateIsFinished(false);
+
         }
     }, [isFinished])
     
