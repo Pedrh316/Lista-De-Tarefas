@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import List from "./List";
 import Board from './Board';
+import React from "react";
+import useControlled from "../hooks/useControlled";
 
 const SMain = styled.main`
     display:flex;
@@ -8,12 +10,18 @@ const SMain = styled.main`
     flex-wrap:wrap;
 `
 
+export const SaveTaskContext = React.createContext();
+
 const Main = () => {
 
+    const {value:isFinished, updateValue:updateIsFinished} = useControlled();
+    
     return (
         <SMain>
-            <Board/>
-            <List/>
+            <SaveTaskContext.Provider value={{isFinished, updateIsFinished}}>
+                <Board/>
+                <List/>
+            </SaveTaskContext.Provider>
         </SMain>
     )
 }

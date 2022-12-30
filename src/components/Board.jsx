@@ -3,6 +3,7 @@ import Manual from "./boardItems/Manual";
 import Markdown from "./boardItems/Markdown";
 import Home from './boardItems/Home';
 import { Route, Routes } from "react-router-dom";
+import View from './boardItems/View';
 
 const SBoard = styled.div`
     flex-basis:600px;
@@ -21,6 +22,7 @@ const Board = () => {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/markdown" element={<Markdown/>}/>
                 <Route path="/manual" element={<Manual/>}/>
+                <Route path="/task/:id" element={<View/>}/>
             </Routes>
         </SBoard>
     )

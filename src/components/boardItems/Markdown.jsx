@@ -3,8 +3,9 @@ import styled from "styled-components";
 import Panel from "../Panel";
 import Preview from "../panelItems/Preview";
 import TextArea from "../panelItems/TextArea";
-import useControlled from "../../hooks/useControlled";
 import { SBtnLink } from "../BtnLink";
+import useControlled from "../../hooks/useControlled";
+import { SaveTaskContext } from "../Main";
 
 const SMarkdown = styled.section`
     padding:2rem 4rem;
@@ -53,9 +54,28 @@ const SLinkCancel = styled(SBtnLink)`
 
 const Markdown = () => {
 
+    const {value, updateValue} = useControlled();
     const [isMarkdown, setIsMarkdown] = React.useState(true);
-    const {value:text, updateValue:updateText} = useControlled();
     const markdownStyle = (isTrue) => ({backgroundColor: isTrue ? '#629CA9' : '#d7e0e5' });
+
+    const {isFinished, updateIsFinished} = React.useContext(SaveTaskContext);
+
+    React.useEffect(() => {
+        if(isFinished){
+            const allTasks = JSON.parse(localStorage.getItem('tasks')) || '';
+
+            const task = {
+                id:allTasks.length,
+                task:value
+            }
+            const newTasks = [...allTasks, task]
+            
+            localStorage.setItem('tasks', JSON.stringify(newTasks));
+            updateIsFinished(false);
+        }
+    }, [isFinished])
+    
+    
 
     return (
         <SMarkdown className="panel">
@@ -70,14 +90,15 @@ const Markdown = () => {
                 {
                     isMarkdown
                     ? 
-                    <TextArea value={text} updateText={updateText}/> 
+                    <TextArea value={value} updateValue={updateValue}/> 
                     :
-                    <Preview value={text}/>
+                    <Preview value={value}/>
                 }
             </Panel>
             <footer>
                 <SLinkCreate to="/">Cancelar</SLinkCreate>
-                <SLinkCancel to="/">Concluir</SLinkCancel>
+                {/* <SLinkCancel to="/">Concluir</SLinkCancel> */}
+                <button onClick={() => updateIsFinished(true)}>Concluir</button>
             </footer>
         </SMarkdown>
     )

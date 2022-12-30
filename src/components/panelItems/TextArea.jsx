@@ -1,4 +1,6 @@
-const TextArea = ({value, updateText}) => {
+import React from "react"
+
+const TextArea = ({value, updateValue}) => {
 
     const style = {
         'height':'200px',
@@ -6,7 +8,7 @@ const TextArea = ({value, updateText}) => {
     }
 
     return (
-        <textarea value={value} onChange={({target}) => updateText(target.value)} style={style}/>
+        <textarea value={value} onChange={({target}) => updateValue(target.value)} style={style}/>
     )
 }
 

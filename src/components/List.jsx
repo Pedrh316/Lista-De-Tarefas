@@ -1,5 +1,7 @@
+import React from "react";
 import styled from "styled-components";
 import ListItem from "./ListItem";
+import { SaveTaskContext } from "./Main";
 
 const SList = styled.section`
 
@@ -21,13 +23,29 @@ const SList = styled.section`
 `
 
 const List = () => {
+    
+    const [items, setItems] = React.useState([]);
+    const {isFinished, updateIsFinished} = React.useContext(SaveTaskContext);
+    
+
+    React.useEffect(() => {
+        const allTasks = JSON.parse(localStorage.getItem('tasks'));
+        const newItems = allTasks?.map(({task, id}) => {
+            const title = task.split(/\n/g)[0];
+            return <ListItem key={id} title={title} id={id}/>
+        })
+        setItems(newItems);
+    }, [isFinished])
+        
+        
+
     return (
         <SList>
             <h2>Lista de Tarefas</h2>
             <div>
-                <ListItem/>
-                <ListItem/>
-                <ListItem/>
+                {
+                    items ? items : <h3>Nenhuma tarefa foi criada ainda</h3>
+                }
             </div>
         </SList>
     )
