@@ -20,5 +20,5 @@ export default function formatter(text){
         }
     })
 
-    return formattedText
+    return {formattedText, lines}
 }

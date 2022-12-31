@@ -1,10 +1,10 @@
 import styled from "styled-components"
+import formatter from "../controllers/formatter"
 
-const STask = styled.div`
-    border:1px solid #8f8f9d;
+const SView = styled.article`
     padding:2rem 1rem;
-    background-color:white;
-    height:300px;
+    background-color:#2D343D;
+    min-height:inherit;
     overflow-y:auto;
 
     h1{
@@ -23,4 +23,13 @@ const STask = styled.div`
     }
 `
 
-export default STask;
+const View = ({children}) => {
+    const {formattedText} = formatter(children || '')
+    return (
+        <SView>
+            {formattedText}
+        </SView>
+    )
+}
+
+export default View
