@@ -9,7 +9,7 @@ const SPreview = styled.div`
 const Preview = ({children}) => {
     return (
         <SPreview>
-            <View>{children}</View>
+            <View enableOptions={false}>{children}</View>
         </SPreview>
     )
 }

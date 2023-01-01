@@ -5,8 +5,8 @@ import Home from "./components/Home"
 import Manual from "./components/Manual"
 import Markdown from "./components/Markdown"
 import Task from "./components/Task"
+import DataContext from "./hooks/useDataContext";
 
-export const DataContext = React.createContext();
 
 const data = JSON.parse(localStorage.getItem('tasks'));
 
@@ -16,7 +16,8 @@ const App = () => {
     const [actualTask, setActualTask] = React.useState();
 
     React.useEffect(() => {
-        localStorage.setItem('tasks', JSON.stringify(tasks))
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        setActualTask(null);
     }, [tasks])
 
     return (

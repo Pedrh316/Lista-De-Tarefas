@@ -1,3 +1,4 @@
+
 export default function formatter(text){
     const lines = text.split(/\n/g);
 
@@ -19,6 +20,6 @@ export default function formatter(text){
                 return <p key={index}>{line}</p>                
         }
     })
-
+    
     return {formattedText, lines}
 }

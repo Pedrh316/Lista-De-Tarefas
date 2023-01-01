@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components"
-import { DataContext } from "../App"
+import DataContext from "../hooks/useDataContext"
 import TaskItem from './TaskItem'
 import View from "./View";
 import formatter from "../controllers/formatter"
@@ -42,10 +42,10 @@ const Task = () => {
 
     return (
         <SSection>
-            <article>
+            <article style={{minHeight:'300px'}}>
                 {
                     actualTask?.text ?
-                    <View>{actualTask.text}</View> 
+                    <View enableOptions={true} id={actualTask.id}>{actualTask.text}</View> 
                     : ( tasks.length > 0 ? <h1 className="title">Selecione uma tarefa.</h1> 
                         : 
                         <h1 className="title">Nenhuma tarefa criada ainda.</h1>

@@ -4,7 +4,7 @@ import useController from '../hooks/useController';
 import { Link } from 'react-router-dom';
 import Preview from './Preview';
 import {createTask} from '../controllers/createTask';
-import { DataContext } from '../App';
+import DataContext from '../hooks/useDataContext';
 
 const SMarkdown = styled.section`
 
@@ -54,7 +54,8 @@ const SMarkdown = styled.section`
         .create{
             background-color:#2681ae;
         }
-        .create:disabled{
+        .create[disabled]{
+            ${(props) => {props.disabled && 'a'}}
             background-color:lightblue;
             filter:none;
         }
@@ -67,6 +68,7 @@ const Markdown = () => {
     const [seePreview, setSeePreview] = React.useState(false);
     const [allowSave, setAllowSave] = React.useState(false);
     const {setTasks} = React.useContext(DataContext);
+
 
     React.useEffect(() => {
         const thereIsAlphanumeric = /\w/g.test(value);
@@ -87,14 +89,21 @@ const Markdown = () => {
             <main>
                 {
                     seePreview ? <Preview>{value}</Preview>: 
-                    <textarea value={value} onChange={({target:{value}}) => updateValue(value)} autoFocus={true}/>
+                    <textarea value={value} onInput={({target:{value}}) => updateValue(value)} autoFocus={true} placeholder="Escreva aqui sua lista de tarefas."/>
                 }
             </main>
             <footer>
                 <button onClick={() => updateValue('')} className="clean">Limpar</button>
                 <div className='right'>
                     <Link to="/tarefa" className="cancel">Cancelar</Link>
-                    <Link to="/tarefa" className="create" disabled={!allowSave} onClick={() => createTask(value, setTasks)}>Concluir</Link>
+                    <Link 
+                        to={`${allowSave ? '/tarefa' : ""}`}
+                        className="create"
+                        disabled={!allowSave}
+                        onClick={() => allowSave && createTask(value, setTasks)}
+                    >
+                        Concluir
+                    </Link>
                 </div>
             </footer>
         </SMarkdown>

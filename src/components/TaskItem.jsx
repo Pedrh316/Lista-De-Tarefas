@@ -1,11 +1,10 @@
 import React from "react"
 import styled from "styled-components"
-import { DataContext } from "../App"
+import DataContext from "../hooks/useDataContext"
 import { findTask } from "../controllers/findTask"
 
 const SButton = styled.button`
-    background:${props => props.selected ? '#424347' : '#555556'};
-
+    background:${props => props.selected ? '#2e2f32' : '#424347'};
     font-size:1.1rem;
 `
 
