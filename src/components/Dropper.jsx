@@ -13,8 +13,7 @@ const SDropper = styled.div`
 
         .drop-icon{
             box-sizing:content-box;
-            width:25px;
-            height:25px;
+            font-size:1.5rem;
             padding:.5rem;
             margin-left:.5rem;
             background-color:#1c1d22;

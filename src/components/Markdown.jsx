@@ -43,6 +43,8 @@ const SMarkdown = styled.section`
     footer{
         display:flex;
         justify-content:space-between;
+        flex-wrap:wrap;
+        gap:1rem;
 
         button, a{
             font-size:1rem;

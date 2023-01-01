@@ -10,13 +10,15 @@ const SSection = styled.section`
     justify-content:center;
     gap:3rem;
     flex-wrap:wrap;
-
+    
     article{
-        flex-basis:600px;
+        flex-grow:1;
+        flex-basis:550px;
     }
 
     ul{
-        flex-basis:300px;        
+        flex-basis:250px;        
+        flex-grow:1;
         list-style:none;
 
         li{
