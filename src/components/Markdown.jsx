@@ -78,11 +78,13 @@ const Markdown = ({add, config}) => {
     const paramId = +useParams().id;
     
     React.useEffect(() => {
-        if(!add && paramId){
+        if(!add && typeof paramId === 'number'){
             const {text} = tasks.find(({id}) => id === paramId);
+            console.log(tasks);
             updateValue(text)
         }
     }, [])
+
 
 
     function modeTask(){
