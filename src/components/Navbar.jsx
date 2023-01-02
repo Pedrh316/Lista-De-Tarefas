@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import {AiOutlineBars} from 'react-icons/ai';
-import useToggle from '../hooks/useToggle';
+import {AiOutlineBars, AiFillHome} from 'react-icons/ai';
 import Menu from './Menu';
 import Dropper from './Dropper';
 
@@ -16,7 +15,16 @@ const SNav = styled.nav`
     .container{
         display:flex;
         align-items:center;
-        justify-content:flex-end;
+        justify-content:space-between;
+
+        .home-link{
+            .home-icon{
+                visibility:hidden;
+                font-size:1.75rem;
+            }
+            pointer-events:none;
+            padding:.4rem 1rem;
+        }
 
         #menu.hidden{
             display:none;
@@ -38,6 +46,14 @@ const SNav = styled.nav`
                     cursor:pointer;
                     pointer-events:none;
                     box-sizing:content-box;
+                }                
+            }
+            .home-link{
+                pointer-events:auto;
+                padding:.4rem 1rem;
+                .home-icon{
+                    visibility:visible;
+                    font-size:1.75rem;
                 }
             }
         }
@@ -48,8 +64,11 @@ const SNav = styled.nav`
 const Navbar = () => {
 
     return (
-        <SNav>
-            <div className="container">           
+        <SNav>            
+            <div className="container">   
+            <Link to="/" className="home-link">
+                <AiFillHome className="home-icon"/>
+            </Link>
                 <Dropper notHideForComputer={true} button={
                     <button className='menu-btn'>
                         <AiOutlineBars className="menu-icon"/>
