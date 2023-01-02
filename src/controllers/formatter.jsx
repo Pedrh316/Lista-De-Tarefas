@@ -3,8 +3,9 @@ export default function formatter(text){
     const lines = text.split(/\n/g);
 
     const formattedText = lines.map((line, index) => {
-        const symbol = line.slice(0,2)
-        const text = line.slice(2);
+        const lineText = line.trim();
+        const symbol = lineText.slice(0,2)
+        const text = lineText.slice(2);
         const thereIsCharacter = /\w/.test(symbol);
         
         switch(symbol){
