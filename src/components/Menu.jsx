@@ -30,7 +30,7 @@ const Menu = () => {
             <li><Link to="/"> Início</Link></li>
             <li><Link to="/tarefa"> Tarefas</Link></li>
             <li><Link to="/manual"> Manual</Link></li>
-            <li><Link to="/add"> Adicionar Tarefa</Link></li>
+            <li><Link to="/adicionar"> Adicionar Tarefa</Link></li>
         </SMenu>
     )
 }

@@ -28,7 +28,8 @@ const App = () => {
                         <Route path="/" element={<Home/>}/>
                         <Route path="/manual" element={<Manual/>}/>
                         <Route path="/tarefa" element={<Task/>}/>
-                        <Route path="/add" element={<Markdown/>}/>
+                        <Route path="/adicionar" element={<Markdown add={true} config={{title:'Adicionar nova tarefa'}}/>}/>
+                        <Route path="/editar/:id" element={<Markdown add={false} config={{title:'Editar tarefa'}}/>}/>
                     </Routes>
                 </div>
             </Router>

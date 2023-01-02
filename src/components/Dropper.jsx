@@ -15,7 +15,7 @@ const SDropper = styled.div`
     }
 `
 
-function Dropper({button, children, notHideForComputer}){
+function Dropper({button, onHideButton, children, notHideForComputer}){
 
     const [showDropdown, setDropdown] = React.useState(false);
     const dropdown = React.useRef();
@@ -41,12 +41,11 @@ function Dropper({button, children, notHideForComputer}){
         toggleHideForComputer();
 
         function toggleHideForComputer(){
-            if(notHideForComputer && innerWidth >= 700){
-                document.removeEventListener("click", hideOnClick);
-            } else{
-                document.addEventListener("click", hideOnClick);
-            }
+            notHideForComputer && innerWidth >= 700 ?
+            document.removeEventListener("click", hideOnClick) :            
+            document.addEventListener("click", hideOnClick);            
         }
+        
         function hideOnClick(e){
             e.target !== dropButton.current && setDropdown(false);
         }
@@ -55,7 +54,9 @@ function Dropper({button, children, notHideForComputer}){
     
     return (
         <SDropper>
-            <div ref={dropButton} className="drop-btn" onClick={() => toggleDropdown()}>{button}</div>
+            <div ref={dropButton} className="drop-btn" onClick={() => toggleDropdown()}>{
+                showDropdown && onHideButton ? onHideButton : button
+            }</div>
             <div ref={dropdown}>
                 {children}
             </div>

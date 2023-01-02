@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import {AiOutlineBars, AiFillHome} from 'react-icons/ai';
+import {BsArrowReturnRight} from 'react-icons/bs';
 import Menu from './Menu';
 import Dropper from './Dropper';
 
@@ -69,11 +70,11 @@ const Navbar = () => {
             <Link to="/" className="home-link">
                 <AiFillHome className="home-icon"/>
             </Link>
-                <Dropper notHideForComputer={true} button={
-                    <button className='menu-btn'>
-                        <AiOutlineBars className="menu-icon"/>
-                    </button>
-                }>
+                <Dropper
+                    notHideForComputer={true}
+                    button={ <button className='menu-btn'> <AiOutlineBars className="menu-icon"/> </button> }
+                    onHideButton={ <button className="menu-btn"><BsArrowReturnRight className="menu-icon"/></button> }
+                >
                     <Menu/>
                 </Dropper>
             </div>

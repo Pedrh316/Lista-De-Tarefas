@@ -65,7 +65,7 @@ const View = ({children, enableOptions, id}) => {
                 <div className="dropper-container">
                     <Dropper button={<button><BsThreeDotsVertical className="drop-btn-icon"/></button>}>
                         <div className="dropdown">
-                            <button>Editar</button>
+                            <Link to={`/editar/${id}`}>Editar</Link>
                             <button onClick={() => deleteTask(id, setTasks)}>Deletar</button>
                         </div>
                     </Dropper>

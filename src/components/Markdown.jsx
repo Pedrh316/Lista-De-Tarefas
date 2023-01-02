@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
 import useController from '../hooks/useController';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Preview from './Preview';
 import {createTask} from '../controllers/createTask';
+import {editTask} from '../controllers/editTask';
 import DataContext from '../hooks/useDataContext';
 
 const SMarkdown = styled.section`
@@ -57,10 +58,10 @@ const SMarkdown = styled.section`
         .clean{
             background-color:#424347;
         }
-        .create{
+        .finish{
             background-color:#2681ae;
         }
-        .create[disabled]{
+        .finish[disabled]{
             ${(props) => {props.disabled && 'a'}}
             background-color:lightblue;
             filter:none;
@@ -68,13 +69,25 @@ const SMarkdown = styled.section`
     }
 `
 
-const Markdown = () => {
-
+const Markdown = ({add, config}) => {
+    
     const {value, updateValue} = useController();
     const [seePreview, setSeePreview] = React.useState(false);
     const [allowSave, setAllowSave] = React.useState(false);
-    const {setTasks} = React.useContext(DataContext);
+    const {tasks, setTasks} = React.useContext(DataContext);
+    const paramId = +useParams().id;
+    
+    React.useEffect(() => {
+        if(!add && paramId){
+            const {text} = tasks.find(({id}) => id === paramId);
+            updateValue(text)
+        }
+    }, [])
 
+
+    function modeTask(){
+        add ? createTask(value, setTasks) : editTask(paramId, value, setTasks);
+    }
 
     React.useEffect(() => {
         const thereIsAlphanumeric = /\w/g.test(value);
@@ -86,7 +99,7 @@ const Markdown = () => {
     return (
         <SMarkdown>
             <header>
-                <h2 className="title">Adicionar nova tarefa</h2>
+                <h2 className="title">{config.title}</h2>
                 <div>
                     <button onClick={ () => setSeePreview(false) } className={`${!seePreview && 'selected'}`}>task</button>
                     <button onClick={ () => setSeePreview(true) } className={`${seePreview && 'selected'}`}>preview</button>
@@ -104,9 +117,9 @@ const Markdown = () => {
                     <Link to="/tarefa" className="cancel">Cancelar</Link>
                     <Link 
                         to={`${allowSave ? '/tarefa' : ""}`}
-                        className="create"
+                        className="finish"
                         disabled={!allowSave}
-                        onClick={() => allowSave && createTask(value, setTasks)}
+                        onClick={() => allowSave && modeTask()}
                     >
                         Concluir
                     </Link>
