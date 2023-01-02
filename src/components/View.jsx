@@ -5,6 +5,7 @@ import formatter from "../controllers/formatter"
 import Dropper from "./Dropper"
 import DataContext from "../hooks/useDataContext"
 import { deleteTask } from "../controllers/deleteTask"
+import {BsThreeDotsVertical} from 'react-icons/bs';
 
 const SView = styled.article`
     padding:2rem 1rem;
@@ -26,20 +27,49 @@ const SView = styled.article`
         font-size:1em;
         list-style-position:inside;
     }
+
+
+    .dropper-container{
+        float:right;
+        .drop-btn-icon{
+            padding:.75rem;
+            box-sizing:content-box;
+            font-size:1.3rem;
+            background-color:#1c1d22;
+            border-radius:50%;
+        }
+        .dropdown{
+            display:flex;
+            flex-direction:column;
+            position:absolute;
+            top:0;
+            left:0;
+            transform:translateX(calc(-100% - .25rem));
+            button, a{
+                background-color:#1c1d22;
+            }
+        }
+    }
+
+
 `
 
 const View = ({children, enableOptions, id}) => {
 
     const {setTasks, setActualTask} = React.useContext(DataContext);
-    const {formattedText} = formatter(children || '')
+    const {formattedText} = formatter(children || '');
 
     return (
         <SView>
             {enableOptions && 
-                <Dropper buttonTitle={'opt'}>
-                    <Link to="/tarefa/edit">Editar</Link>
-                    <button onClick={() => deleteTask(id, setTasks)}>Deletar</button>
-                </Dropper>
+                <div className="dropper-container">
+                    <Dropper button={<button><BsThreeDotsVertical className="drop-btn-icon"/></button>}>
+                        <div className="dropdown">
+                            <button>Editar</button>
+                            <button onClick={() => deleteTask(id, setTasks)}>Deletar</button>
+                        </div>
+                    </Dropper>
+                </div>
             }
             {formattedText}
         </SView>

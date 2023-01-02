@@ -1,57 +1,64 @@
+import React from "react";
 import styled from "styled-components"
-import useToggle from '../hooks/useToggle';
-import {BsThreeDotsVertical} from 'react-icons/bs';
-import { IconContext } from "react-icons";
+
 
 const SDropper = styled.div`
     position:relative;
-    float:right;
 
-    .drop-btn{
-        padding:0rem;
-        cursor:pointer;
-
-        .drop-icon{
-            box-sizing:content-box;
-            font-size:1.5rem;
-            padding:.5rem;
-            margin-left:.5rem;
-            background-color:#1c1d22;
-            border-radius:50%;
+    .drop-btn {
+        & > button{
+            padding:0;
         }
+        & > * {            
+            pointer-events:none;
+        } 
     }
-    
-    .dropdown{
-        position:absolute;
-        left:0;
-        top:0;
-        transform:translateX(calc(-100% + 5px));
-        display:flex;
-        flex-direction:column;
-        background-color:#555;
-
-        & > * {
-            font-size:1rem;
-            background-color:#1c1d22;
-        }
-    }    
-
 `
 
-const Dropper = ({children}) => {
+function Dropper({button, children, notHideForComputer}){
 
-    const {status:show, toggleStatus:toggleShow} = useToggle();
+    const [showDropdown, setDropdown] = React.useState(false);
+    const dropdown = React.useRef();
+    const dropButton = React.useRef();
+
+    function toggleDropdown(){
+        setDropdown(prevShow => !prevShow);
+    }
+    
+    React.useEffect(() => {
+        showDropdown ? dropdown.current.classList.remove('hidden') : dropdown.current.classList.add('hidden');
+    }, [showDropdown])
+
+    React.useEffect(() => {
+        innerWidth > 700 && setDropdown(true);    
+        document.addEventListener("click", hideOnClick)
+
+        window.addEventListener("resize", () => {            
+            innerWidth < 700 ? setDropdown(false) : notHideForComputer && setDropdown(true);
+            toggleHideForComputer()
+        })
+        
+        toggleHideForComputer();
+
+        function toggleHideForComputer(){
+            if(notHideForComputer && innerWidth >= 700){
+                document.removeEventListener("click", hideOnClick);
+            } else{
+                document.addEventListener("click", hideOnClick);
+            }
+        }
+        function hideOnClick(e){
+            e.target !== dropButton.current && setDropdown(false);
+        }
+
+    }, [])
     
     return (
         <SDropper>
-            <button onClick={() => toggleShow()} className="drop-btn">{
-                <BsThreeDotsVertical className="drop-icon"/>
-            }</button>
-            {
-                show && <div className="dropdown">
-                    {children}
-                </div>
-            }
+            <div ref={dropButton} className="drop-btn" onClick={() => toggleDropdown()}>{button}</div>
+            <div ref={dropdown}>
+                {children}
+            </div>
         </SDropper>
     )
 }
