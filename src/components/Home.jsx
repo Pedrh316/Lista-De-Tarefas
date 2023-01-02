@@ -17,7 +17,7 @@ const Home = () => {
             <h1 className="title">Lista de tarefas</h1>
             <Link to="/manual">Manual</Link>
             <Link to="/tarefa">Tarefas</Link>
-            <Link to="/add">Adicionar Tarefa</Link>
+            <Link to="/adicionar">Adicionar Tarefa</Link>
         </SSection>
     )
 }
