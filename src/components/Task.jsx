@@ -40,7 +40,7 @@ const Task = () => {
         title = title.length === 20 ? `${title}...` : title;
 
         return <li key={id}><TaskItem id={id}> {title} </TaskItem></li>
-    })
+    }).reverse();
 
     return (
         <SSection>

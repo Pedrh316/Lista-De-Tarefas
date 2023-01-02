@@ -1,5 +1,7 @@
 export const editTask = (id, value, setTasks) => {
-    setTasks(prevTasks => prevTasks.map((task) => {
-        return task.id === id ? {...task, text:value} : task
-    }))
+    setTasks(prevTasks => {
+        let tasks = prevTasks.filter(task => task.id !== id);
+        let task = prevTasks.find(task => task.id === id);
+        return [...tasks, {...task, text:value}];
+    })
 }
