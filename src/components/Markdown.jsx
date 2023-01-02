@@ -39,6 +39,9 @@ const SMarkdown = styled.section`
         & > *{
             min-height:inherit;
         }
+        textarea{
+            font-size:1.3rem;
+        }
     }
 
     footer{

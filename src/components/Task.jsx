@@ -46,9 +46,13 @@ const Task = () => {
         <SSection>
             <article style={{minHeight:'300px'}}>
                 {
-                    actualTask?.text ?
+                    actualTask?.text
+                    ?
                     <View enableOptions={true} id={actualTask.id}>{actualTask.text}</View> 
-                    : ( tasks.length > 0 ? <h1 className="title">Selecione uma tarefa.</h1> 
+                    :
+                    ( tasks.length > 0 
+                        ?
+                        <h1 className="title">Selecione uma tarefa.</h1> 
                         : 
                         <h1 className="title">Nenhuma tarefa criada ainda.</h1>
                     )
