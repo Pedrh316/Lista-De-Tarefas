@@ -3,7 +3,6 @@ import styled from "styled-components"
 import DataContext from "../hooks/useDataContext"
 import TaskItem from './TaskItem'
 import View from "./View";
-import formatter from "../controllers/formatter"
 
 const SSection = styled.section`
     display:flex;
@@ -36,7 +35,7 @@ const Task = () => {
     const {tasks, actualTask} = React.useContext(DataContext)
 
     const items = tasks.map(({text, id}) => {     
-        let title = formatter(text).lines[0].slice(0,20);
+        let title = text.trim().slice(0, 20).split(/\W/).join(' ');
         title = title.length === 20 ? `${title}...` : title;
 
         return <li key={id}><TaskItem id={id}> {title} </TaskItem></li>

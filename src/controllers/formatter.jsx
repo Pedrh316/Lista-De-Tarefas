@@ -1,26 +1,45 @@
-
-export default function formatter(text){
-    const lines = text.split(/\n/g);
-
-    const formattedText = lines.map((line, index) => {
-        const lineText = line.trim();
-        const symbol = lineText.slice(0,2)
-        const text = lineText.slice(2);
-        const thereIsCharacter = /\w/.test(symbol);
-        
-        switch(symbol){
-            case '# ':
-                return <h1 key={index}>{text}</h1>
-            case '##':
-                return <h2 key={index}> {text}</h2>
-            case '- ':
-                return <li key={index}>{text}</li>
-            case '':
-                return <br key={index}/>
-            case thereIsCharacter && symbol.match(/\w+/)[0]:
-                return <p key={index}>{line}</p>                
-        }
-    })
+export default function Formatter({children}){
     
-    return {formattedText, lines}
+    function defineContents(text, pattern, element, symbolLength){
+    
+        const notElement = text.split(pattern);
+        const predecessorContent = <Formatter>{notElement[0]}</Formatter>;
+        const successorContent = <Formatter>{notElement[1]}</Formatter>;
+        const formattedContent = text.match(pattern)[0].slice(symbolLength, -(symbolLength+1));
+    
+        switch(element){
+            case 'h1':
+                return <>{predecessorContent}<h1><Formatter>{formattedContent}</Formatter></h1>{successorContent}</>
+            case 'h2':
+                return <>{predecessorContent}<h2><Formatter>{formattedContent}</Formatter></h2>{successorContent}</>
+            case 'p':
+                return <>{predecessorContent}<p><Formatter>{formattedContent}</Formatter></p>{successorContent}</>
+            case 'green':
+                return <>{predecessorContent}<span style={{color:'green'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
+            case 'red':
+                return <>{predecessorContent}<span style={{color:'red'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
+            case 'purple':
+                return <>{predecessorContent}<span style={{color:'purple'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
+        }
+    }
+
+    switch(true){
+        case /#.+\/#/.test(children):
+            return defineContents(children, /#.+\/#/, 'h1', 1);
+        case /@.+\/@/.test(children):
+            return defineContents(children, /@.+\/@/, 'h2', 1);
+        case /<.+\/>/.test(children):
+            return defineContents(children, /<.+\/>/, 'p', 1);
+        case /&vd.+\/&vd/.test(children):
+            return defineContents(children, /&vd.+\/&vd/, 'green', 3);
+        case /&vm.+\/&vm/.test(children):
+            return defineContents(children, /&vm.+\/&vm/, 'red', 3);
+        case /&ro.+\/&ro/.test(children):
+            return defineContents(children, /&ro.+\/&ro/, 'purple', 3);
+        default:
+            return <>{children}</>
+    }
+
 }
+
+

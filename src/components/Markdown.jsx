@@ -80,7 +80,6 @@ const Markdown = ({add, config}) => {
     React.useEffect(() => {
         if(!add && paramId !== null){
             const {text} = tasks.find(({id}) => id === paramId);
-            console.log(tasks);
             updateValue(text)
         }
     }, [])

@@ -1,11 +1,11 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import formatter from "../controllers/formatter"
 import Dropper from "./Dropper"
 import DataContext from "../hooks/useDataContext"
 import { deleteTask } from "../controllers/deleteTask"
 import {BsThreeDotsVertical} from 'react-icons/bs';
+import Formatter from "../controllers/formatter"
 
 const SView = styled.article`
     padding:2rem 1rem;
@@ -56,8 +56,7 @@ const SView = styled.article`
 
 const View = ({children, enableOptions, id}) => {
 
-    const {setTasks, setActualTask} = React.useContext(DataContext);
-    const {formattedText} = formatter(children || '');
+    const {setTasks} = React.useContext(DataContext);
 
     return (
         <SView>
@@ -71,7 +70,7 @@ const View = ({children, enableOptions, id}) => {
                     </Dropper>
                 </div>
             }
-            {formattedText}
+            <div className="formatter">{<Formatter>{children}</Formatter>}</div>
         </SView>
     )
 }
