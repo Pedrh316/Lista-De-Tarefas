@@ -29,6 +29,9 @@ const SView = styled.article`
         list-style-position:inside;
     }
 
+    *{
+        margin:1em 0;
+    }
 
     .dropper-container{
         float:right;
