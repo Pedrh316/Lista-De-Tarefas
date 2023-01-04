@@ -14,6 +14,10 @@ const SView = styled.article`
     overflow-y:auto;
     resize:vertical;
 
+    &>*:first-child{
+        margin-top:0;
+    }
+
     h1{
         font-size:2em;
         border-bottom:3px dotted #ccc;
@@ -29,7 +33,7 @@ const SView = styled.article`
         list-style-position:inside;
     }
 
-    *{
+    *:not( .dropper-container, .dropper-container *){
         margin:1em 0;
     }
 
