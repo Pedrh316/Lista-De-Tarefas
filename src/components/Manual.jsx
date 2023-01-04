@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import Formatter from "../controllers/formatter"
-import View from "./View"
 
 const SSection = styled.section`
 
@@ -40,13 +39,6 @@ const SSection = styled.section`
 
     .symbol-small{
         min-width:50px;
-    }
-
-    .example{
-        .output{
-            padding:1rem;
-            background-color:#2d343d;
-        }        
     }
 
 `

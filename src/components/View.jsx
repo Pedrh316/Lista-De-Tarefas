@@ -12,6 +12,7 @@ const SView = styled.article`
     background-color:#2D343D;
     min-height:inherit;
     overflow-y:auto;
+    resize:vertical;
 
     h1{
         font-size:2em;
@@ -50,7 +51,6 @@ const SView = styled.article`
             }
         }
     }
-
 
 `
 
