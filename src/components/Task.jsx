@@ -35,7 +35,7 @@ const Task = () => {
     const {tasks, actualTask} = React.useContext(DataContext)
 
     const items = tasks.map(({text, id}) => {     
-        let title = text.trim().slice(0, 20).split(/\W/).join(' ');
+        let title = text.trim().slice(0, 20).split(/[\W^À-ÿ]/).join(' ');
         title = title.length === 20 ? `${title}...` : title;
 
         return <li key={id}><TaskItem id={id}> {title} </TaskItem></li>

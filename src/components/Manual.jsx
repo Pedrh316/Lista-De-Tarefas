@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import Formatter from "../controllers/formatter"
+import View from "./View"
 
 const SSection = styled.section`
 
@@ -19,8 +21,8 @@ const SSection = styled.section`
         margin-block:1em;
     }
 
-    h4, .list{
-        margin-bottom:.5rem;
+    h4, .list, .example{
+        margin-bottom:.5em;
     }
 
     h4 + .list{
@@ -37,11 +39,16 @@ const SSection = styled.section`
     }
 
     .symbol-small{
-        min-width:30px;
+        min-width:50px;
     }
-    .symbol-medium{
-        min-width:90px;
+
+    .example{
+        .output{
+            padding:1rem;
+            background-color:#2d343d;
+        }        
     }
+
 `
 
 const Manual = () => {
@@ -50,21 +57,37 @@ const Manual = () => {
             <h2 className="title">Manual de formatação de texto</h2>
             <p>Nesta seção você aprenderá como manipular a escrita dos seus textos através da utilização de símbolos, que definirão se uma determinada linha será um título, subtítulo, item de lista, parágrafo, etc.</p>
             <h3 className="subtitle">Como utilizar e exemplos</h3>
-            <p>Cada símbolo será classificado como símbolo com ou sem fechamento.</p>
-            <h4>Possem fechamento</h4>
+            <p>
+                Para que cada um dos símbolos que serão apresentados abaixo funcione corretamente, você deverá seguir três passos:
+            </p>
+            <ol className="list">
+                <li>Digitar um símbolo. ex(#);</li>
+                <li>Digitar um texto. ex(Título);</li>
+                <li>Digitar caractere de fechamento: /#</li>
+            </ol>
+
+            <div className="example">
+                <p>Seguindo os passos acima teremos <code># Título /#</code> e como resultado o seguinte output:</p>
+                <div className="output"><Formatter># Título /#</Formatter></div>
+            </div>
+
+            <p>Os mesmos passos deverão ser seguidos a todos os símbolos listados abaixo nesta página.</p>
+
+            <h2 className="subtitle">Símbolos</h2>
+
+            <h4>Para definir cargas semânticas:</h4>
             <ul className="list">
-                <li><span className="symbol-medium">&vd /&vd</span>adiciona fonte verde</li>
-                <li><span className="symbol-medium">&vm /&vm</span>adiciona fonte vermelha</li>
-                <li><span className="symbol-medium">&am /&am</span>adiciona fonte amarela</li>
-                <li><span className="symbol-medium">&az /&az</span>adiciona fonte azul</li>
-                <li><span className="symbol-medium">&la /&la</span>adiciona fonte laranja</li>
+                <li><span className="symbol-small">#</span>adiciona título</li>
+                <li><span className="symbol-small">##</span>adiciona subtítulo</li>
             </ul>
-            
-            <h4>Não possuem fechamento</h4>
+
+            <h4>Para definir cores de fonte:</h4>
             <ul className="list">
-                <li><span className="symbol-small">#</span>Título.</li>
-                <li><span className="symbol-small">##</span>Subtítulo.</li>
-                <li><span className="symbol-small">-</span>Item de uma lista </li>
+                <li><span className="symbol-small">&vd</span>adiciona fonte verde</li>
+                <li><span className="symbol-small">&vm</span>adiciona fonte vermelha</li>
+                <li><span className="symbol-small">&am</span>adiciona fonte amarela</li>
+                <li><span className="symbol-small">&az</span>adiciona fonte azul</li>
+                <li><span className="symbol-small">&la</span>adiciona fonte laranja</li>
             </ul>
         </SSection>
     )

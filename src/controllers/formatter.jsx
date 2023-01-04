@@ -15,11 +15,18 @@ export default function Formatter({children}){
             case 'p':
                 return <>{predecessorContent}<p><Formatter>{formattedContent}</Formatter></p>{successorContent}</>
             case 'green':
-                return <>{predecessorContent}<span style={{color:'green'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
+                return <>{predecessorContent}<span style={{color:'greenyellow'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
             case 'red':
                 return <>{predecessorContent}<span style={{color:'red'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
-            case 'purple':
-                return <>{predecessorContent}<span style={{color:'purple'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
+            case 'pink':
+                return <>{predecessorContent}<span style={{color:'#f0f'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
+            case 'blue':
+                return <>{predecessorContent}<span style={{color:'#4bbcff'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
+            case 'yellow':
+                return <>{predecessorContent}<span style={{color:'#f7ff00'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
+            case 'orange':
+                return <>{predecessorContent}<span style={{color:'orange'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
+    
         }
     }
 
@@ -35,7 +42,13 @@ export default function Formatter({children}){
         case /&vm.+\/&vm/.test(children):
             return defineContents(children, /&vm.+\/&vm/, 'red', 3);
         case /&ro.+\/&ro/.test(children):
-            return defineContents(children, /&ro.+\/&ro/, 'purple', 3);
+            return defineContents(children, /&ro.+\/&ro/, 'pink', 3);
+        case /&az.+\/&az/.test(children):
+            return defineContents(children, /&az.+\/&az/, 'blue', 3);
+        case /&am.+\/&am/.test(children):
+            return defineContents(children, /&am.+\/&am/, 'yellow', 3);
+        case /&la.+\/&la/.test(children):
+            return defineContents(children, /&la.+\/&la/, 'orange', 3);
         default:
             return <>{children}</>
     }

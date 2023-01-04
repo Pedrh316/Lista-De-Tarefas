@@ -62,7 +62,6 @@ const SMarkdown = styled.section`
             background-color:#2681ae;
         }
         .finish[disabled]{
-            ${(props) => {props.disabled && 'a'}}
             background-color:lightblue;
             filter:none;
         }
@@ -102,8 +101,8 @@ const Markdown = ({add, config}) => {
             <header>
                 <h2 className="title">{config.title}</h2>
                 <div>
-                    <button onClick={ () => setSeePreview(false) } className={`${!seePreview && 'selected'}`}>task</button>
-                    <button onClick={ () => setSeePreview(true) } className={`${seePreview && 'selected'}`}>preview</button>
+                    <button onClick={ () => setSeePreview(false) } className={`${!seePreview ? 'selected' : ''}`}>task</button>
+                    <button onClick={ () => setSeePreview(true) } className={`${seePreview ? 'selected' : ''}`}>preview</button>
                 </div>
             </header>
             <main>
