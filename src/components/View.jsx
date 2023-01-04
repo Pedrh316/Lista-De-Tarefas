@@ -13,9 +13,13 @@ const SView = styled.article`
     min-height:inherit;
     overflow-y:auto;
     resize:vertical;
-
-    &>*:first-child{
+    
+    .formatter > *:first-child{
         margin-top:0;
+    }
+
+    *:not(.formatter, .dropper-container, .dropper-container *){
+        margin:1em 0;
     }
 
     h1{
@@ -33,9 +37,6 @@ const SView = styled.article`
         list-style-position:inside;
     }
 
-    *:not( .dropper-container, .dropper-container *){
-        margin:1em 0;
-    }
 
     .dropper-container{
         float:right;
