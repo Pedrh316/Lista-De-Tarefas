@@ -71,6 +71,7 @@ const Manual = () => {
             <ul className="list">
                 <li><span className="symbol-small">#</span>adiciona título</li>
                 <li><span className="symbol-small">##</span>adiciona subtítulo</li>
+                <li><span className="symbol-small">*</span>adiciona parágrafo</li>
             </ul>
 
             <h4>Para definir cores de fonte:</h4>
