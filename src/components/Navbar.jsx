@@ -10,7 +10,10 @@ const SNav = styled.nav`
     background-color:#2D343D;
     padding-block:.5rem;    
     margin-bottom:3rem;
-    position:relative;
+    position:sticky;
+    top:0;
+    left:0;
+    right:0;
     z-index:20;
 
     .container{
