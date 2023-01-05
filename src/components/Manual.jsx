@@ -63,7 +63,7 @@ const Manual = () => {
                     <ul className="list">
                         <li><span className="symbol-small">#</span>Título</li>
                         <li><span className="symbol-small">@</span>Subtítulo</li>
-                        <li><span className="symbol-small">-</span>Item de lista</li>
+                        <li><span className="symbol-small">_</span>Item de lista</li>
                         <li><span className="symbol-small">*</span>Parágrafo</li>
                     </ul>
                 </li>

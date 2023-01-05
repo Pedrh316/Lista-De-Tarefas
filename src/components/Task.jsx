@@ -35,7 +35,7 @@ const Task = () => {
     const {tasks, actualTask} = React.useContext(DataContext);
 
     const items = tasks.map(({text, id}) => {
-        let title = text.trim().slice(0, 30).split(/\/&la|&la|&az|\/&az|&am|\/&am|&ro|\/&ro|&vd|\/&vd|[#\*@]/); 
+        let title = text.trim().slice(0, 30).split(/\/&la|&la|&az|\/&az|&am|\/&am|&ro|\/&ro|&vd|\/&vd|[#\*@_]/); 
         title = title.length >= 30 ? `${title.slice(0,20)}...` : title;
         return <li key={id}><TaskItem id={id}> {title} </TaskItem></li>
     }).reverse();

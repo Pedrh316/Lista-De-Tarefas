@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 export default function Formatter({children, inline}){
 let userTextDivision = inline ?
     children.split(/(&vd.+?\/&vd)|(&vm.+?\/&vm)|(&am.+?\/&am)|(&ro.+?\/&ro)|(&az.+?\/&az)|(&la.+?\/&la)|(!.+?\/!)|(\|.+?\/\|)/s) :
-    children.split(/(?=[@#\-\*])/s)
+    children.split(/(?=[@#_\*])/s)
 
     let formattedText = userTextDivision.map((text, i) => {
 
@@ -34,7 +34,7 @@ let userTextDivision = inline ?
             case /\*.*/s.test(symbol):
                 cleanText = removeSymbol.unclosed(text, 1);
                 return <p key={nanoid()}><Formatter inline={true}>{cleanText}</Formatter></p>
-            case /\-.*/s.test(symbol):
+            case /_.*/s.test(symbol):
                 cleanText = removeSymbol.unclosed(text, 1);
                 return <li key={nanoid()} style={{listStyleType:'dot'}}><Formatter inline={true}>{cleanText}</Formatter></li>
             case /!.+\/!/s.test(text):
