@@ -83,8 +83,6 @@ const Markdown = ({add, config}) => {
         }
     }, [])
 
-
-
     function modeTask(){
         add ? createTask(value, setTasks) : editTask(paramId, value, setTasks);
     }
@@ -112,7 +110,7 @@ const Markdown = ({add, config}) => {
                 }
             </main>
             <footer>
-                <button onClick={() => updateValue('')} className="clean">Limpar</button>
+                <button onClick={() => {updateValue(''); }} className="clean">Limpar</button>
                 <div className='right'>
                     <Link to="/tarefa" className="cancel">Cancelar</Link>
                     <Link 

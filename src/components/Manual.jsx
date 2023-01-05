@@ -74,7 +74,7 @@ const Manual = () => {
             <p>Além disso, vale ressaltar também que nenhum dos símbolos que possuem fechamento ou não podem receber outros símbolos de mesma classificação, ou seja, cada símbolo de mesmo tipo deverá estar separado dos outros.</p>
 
             <h3 className="subtitle">Exemplos</h3>
-            <p>Para uma melhor compreensão do que foi dito até agora, abaixo estão alguns exemplos com seus respectivos outputs</p>
+            <p>Para uma melhor compreensão do que foi dito até agora, abaixo estão alguns exemplos com seus respectivos outputs.</p>
             <ul className="list">
                 <li>
                     <div className="example">

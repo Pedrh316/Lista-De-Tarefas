@@ -32,12 +32,11 @@ const SSection = styled.section`
 
 const Task = () => {
 
-    const {tasks, actualTask} = React.useContext(DataContext)
+    const {tasks, actualTask} = React.useContext(DataContext);
 
-    const items = tasks.map(({text, id}) => {     
-        let title = text.trim().slice(0, 20).split(/[\W^À-ÿ]/).join(' ');
-        title = title.length === 20 ? `${title}...` : title;
-
+    const items = tasks.map(({text, id}) => {
+        let title = text.trim().slice(0, 30).split(/\/&la|&la|&az|\/&az|&am|\/&am|&ro|\/&ro|&vd|\/&vd|[#\*@]/); 
+        title = title.length >= 30 ? `${title.slice(0,20)}...` : title;
         return <li key={id}><TaskItem id={id}> {title} </TaskItem></li>
     }).reverse();
 
@@ -45,16 +44,13 @@ const Task = () => {
         <SSection>
             <article style={{minHeight:'300px'}}>
                 {
-                    actualTask?.text
-                    ?
-                    <View enableOptions={true} id={actualTask.id}>{actualTask.text}</View> 
-                    :
-                    ( tasks.length > 0 
-                        ?
-                        <h1 className="title">Selecione uma tarefa.</h1> 
-                        : 
-                        <h1 className="title">Nenhuma tarefa criada ainda.</h1>
-                    )
+                    actualTask?.text ?
+                        <View enableOptions={true} id={actualTask.id}>{actualTask.text}</View> :
+                        (
+                            tasks.length > 0 
+                            ? <h1 className="title">Selecione uma tarefa.</h1> 
+                            : <h1 className="title">Nenhuma tarefa criada ainda.</h1>
+                        )
                 }
             </article>
 

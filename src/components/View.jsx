@@ -39,6 +39,7 @@ const SView = styled.article`
 
 
     .dropper-container{
+        transform:translateY(-1rem);
         float:right;
         .drop-btn-icon{
             padding:.75rem;

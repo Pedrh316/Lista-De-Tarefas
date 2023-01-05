@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 export default function Formatter({children, inline}){
 let userTextDivision = inline ?
     children.split(/(&vd.+?\/&vd)|(&vm.+?\/&vm)|(&am.+?\/&am)|(&ro.+?\/&ro)|(&az.+?\/&az)|(&la.+?\/&la)|(!.+?\/!)|(\|.+?\/\|)/s) :
-    children.split(/(?=[@,#,\-,\*])/s)
+    children.split(/(?=[@#\-\*])/s)
 
     let formattedText = userTextDivision.map((text, i) => {
 
