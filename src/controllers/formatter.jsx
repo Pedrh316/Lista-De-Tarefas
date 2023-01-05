@@ -1,66 +1,72 @@
-export default function Formatter({children}){
-    
-    function defineContents(text, pattern, element, symbolLength){
-    
-        const notElement = text.split(pattern);
+import { nanoid } from "nanoid";
 
-        let thereIsSuccessorContent = text.indexOf(notElement[2]) || '';
-        const predecessorContent = <Formatter>{notElement[0]}</Formatter>;
-        const successorContent = <Formatter>{thereIsSuccessorContent && text.slice(text.indexOf(notElement[2]))}</Formatter>;
-        const formattedContent = text.match(pattern)[0].slice(symbolLength, -(symbolLength+1));
-        
+export default function Formatter({children, inline}){
+let userTextDivision = inline ?
+    children.split(/(&vd.+?\/&vd)|(&vm.+?\/&vm)|(&am.+?\/&am)|(&ro.+?\/&ro)|(&az.+?\/&az)|(&la.+?\/&la)|(!.+?\/!)|(\|.+?\/\|)/s) :
+    children.split(/(?=[@,#,\-,\*])/s)
 
-        switch(element){
-            case 'h1':
-                return <>{predecessorContent}<h1><Formatter>{formattedContent}</Formatter></h1>{successorContent}</>
-            case 'h2':
-                return <>{predecessorContent}<h2><Formatter>{formattedContent}</Formatter></h2>{successorContent}</>
-            case 'p':
-                return <>{predecessorContent}<p><Formatter>{formattedContent}</Formatter></p>{successorContent}</>
-            case 'li':
-                return <>{predecessorContent}<li><Formatter>{formattedContent}</Formatter></li>{successorContent}</>
-            case 'green':
-                return <>{predecessorContent}<span style={{color:'greenyellow'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
-            case 'red':
-                return <>{predecessorContent}<span style={{color:'red'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
-            case 'pink':
-                return <>{predecessorContent}<span style={{color:'#f0f'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
-            case 'blue':
-                return <>{predecessorContent}<span style={{color:'#4bbcff'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
-            case 'yellow':
-                return <>{predecessorContent}<span style={{color:'#f7ff00'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
-            case 'orange':
-                return <>{predecessorContent}<span style={{color:'orange'}}><Formatter>{formattedContent}</Formatter></span>{successorContent}</>
-            default:
-                return <>{children}</>
+    let formattedText = userTextDivision.map((text, i) => {
+
+        if(!text){
+            return ''
         }
 
-    }
+        let cleanText = null;
+        let symbol = text.slice(0,3);
+        
+        let removeSymbol = {
+            unclosed(text, index){
+                return text.slice(index,)
+            },
+            closed(text, index){
+                return text.slice(index, -(index+1))
+            }
+        };
+        
 
-    switch(true){
-        case /(#.+\/#){1}/.test(children):
-            return defineContents(children, /(#.+\/#){1}/, 'h1', 1);
-        case /@.+\/@/.test(children):
-            return defineContents(children, /(@.+\/@){1}/, 'h2', 1);
-        case /\*.+\/\*/.test(children):
-            return defineContents(children, /(\*.+\/\*){1}/, 'p', 1);
-        case /-.+\/-/.test(children):
-            return defineContents(children, /(-.+\/-){1}/, 'li', 1);
-        case /&vd.+\/&vd/.test(children):
-            return defineContents(children, /(&vd.+\/&vd){1}/, 'green', 3);
-        case /&vm.+\/&vm/.test(children):
-            return defineContents(children, /(&vm.+\/&vm){1}/, 'red', 3);
-        case /&ro.+\/&ro/.test(children):
-            return defineContents(children, /(&ro.+\/&ro){1}/, 'pink', 3);
-        case /&az.+\/&az/.test(children):
-            return defineContents(children, /(&az.+\/&az){1}/, 'blue', 3);
-        case /&am.+\/&am/.test(children):
-            return defineContents(children, /(&am.+\/&am){1}/, 'yellow', 3);
-        case /&la.+\/&la/.test(children):
-            return defineContents(children, /(&la.+\/&la){1}/, 'orange', 3);
-        default:
-            return <>{children}</>
-    }
+        switch(true){
+            case /#.*/s.test(symbol):
+                cleanText = removeSymbol.unclosed(text, 1);
+                return <h1 key={nanoid()}><Formatter inline={true}>{cleanText}</Formatter></h1>
+            case /@.*/s.test(symbol):
+                cleanText = removeSymbol.unclosed(text, 1);
+                return <h2 key={nanoid()}><Formatter inline={true}>{cleanText}</Formatter></h2>
+            case /\*.*/s.test(symbol):
+                cleanText = removeSymbol.unclosed(text, 1);
+                return <p key={nanoid()}><Formatter inline={true}>{cleanText}</Formatter></p>
+            case /\-.*/s.test(symbol):
+                cleanText = removeSymbol.unclosed(text, 1);
+                return <li key={nanoid()} style={{listStyleType:'dot'}}><Formatter inline={true}>{cleanText}</Formatter></li>
+            case /!.+\/!/s.test(text):
+                cleanText = removeSymbol.closed(text, 1);
+                return <b key={nanoid()}><Formatter>{cleanText}</Formatter></b>
+            case /\|.+\/\|/s.test(text):
+                cleanText = removeSymbol.closed(text, 1);
+                return <i key={nanoid()}><Formatter>{cleanText}</Formatter></i>
+            case /&vd.+\/&vd/s.test(text):
+                cleanText = removeSymbol.closed(text,3);
+                return <span key={nanoid()} style={{color:'greenyellow'}}><Formatter>{cleanText}</Formatter></span>
+            case /&vm.+&vm/s.test(text):
+                cleanText = removeSymbol.closed(text, 3);
+                return <span key={nanoid()} style={{color:'red'}}><Formatter>{cleanText}</Formatter></span>
+            case /&am.+\/&am/s.test(text):
+                cleanText = removeSymbol.closed(text, 3);
+                return <span key={nanoid()} style={{color:'yellow'}}><Formatter>{cleanText}</Formatter></span>
+            case /&ro.+\/&ro/s.test(text):
+                cleanText = removeSymbol.closed(text, 3);
+                return <span key={nanoid()} style={{color:'#f0f'}}><Formatter>{cleanText}</Formatter></span>
+            case /&az.+\/&az/s.test(text):
+                cleanText = removeSymbol.closed(text, 3);
+                return <span key={nanoid()} style={{color:'#4bbcff'}}><Formatter>{cleanText}</Formatter></span>
+            case /&la.+\/&la/s.test(text):
+                cleanText = removeSymbol.closed(text, 3);
+                return <span key={nanoid()} style={{color:'orange'}}><Formatter>{cleanText}</Formatter></span>
+            default:
+                return text
+        }
+    })
+
+    return <>{formattedText}</>
 
 }
 
