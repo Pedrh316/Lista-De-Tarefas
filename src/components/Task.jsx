@@ -36,7 +36,6 @@ const Task = () => {
 
     const items = tasks.map(({text, id}) => {
         let title = text.trim().slice(0, 60).split(/\/&la|&la|&az|\/&az|&am|\/&am|&ro|\/&ro|&vd|\/&vd|[#\*@_]/s).join('').slice(0, 23);
-        console.log(title.length);
         title = title.length >= 23 ? `${title.slice(0,20)}...` : title;
         return <li key={id}><TaskItem id={id}> {title} </TaskItem></li>
     }).reverse();
