@@ -32,9 +32,33 @@ const SView = styled.article`
         font-size:1.6em;
         margin-bottom:.5em;
     }
-    li{
+
+    .list-item{
         font-size:1em;
         list-style-position:inside;
+        list-style-type:disc;
+    }
+
+    .yellow{
+        color:yellow;
+    }
+    .green-yellow{
+        color:greenyellow;
+    }
+    .red{
+        color:red;
+    }
+    .green{
+        color:green;
+    }
+    .orange{
+        color:orangered;
+    }
+    .pink{
+        color:#f0f;
+    }
+    .blue{
+        color:#4bbcff
     }
 
 
