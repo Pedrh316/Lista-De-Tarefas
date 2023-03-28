@@ -69,9 +69,9 @@ const Manual = () => {
                 </li>
             </ul>
             <p>Mas voce deve estar se perguntando: <Formatter inline={true}>&am"Se eu não preciso fechar um símbolo, quer dizer que tudo que estiver escrito abaixo continuará sendo por exemplo um título?" /&am, e a resposta é ! não /!</Formatter>.
-                Cada símbolo que não possui autofechamento será separado pelo próximo símbolo sem fechamento. Portanto, é crucial a utilização da semântica na criação de sua lista de tarefas ou anotações.
+                Cada símbolo que não possui autofechamento será separado pelo próximo símbolo sem fechamento. Portanto, é crucial a aplicação e consciência semântica na criação de sua lista de tarefas ou anotações.
             </p>
-            <p>Além disso, vale ressaltar também que nenhum dos símbolos que possuem fechamento ou não podem receber outros símbolos de mesma classificação, ou seja, cada símbolo de mesmo tipo deverá estar separado dos outros.</p>
+            <p>Além disso, vale ressaltar também que nenhum dos símbolos que não possuem fechamento podem receber em seu interior outros símbolos de mesma classificação.</p>
 
             <h3 className="subtitle">Exemplos</h3>
             <p>Para uma melhor compreensão do que foi dito até agora, abaixo estão alguns exemplos com seus respectivos outputs.</p>
